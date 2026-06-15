@@ -48,7 +48,7 @@ WHERE tournament_category= 'Champions League' AND match_status= 'Available';
 
 -- Query 2: Search for all users whose full names start with 'Tanvir' or contain the phrase 'Haque' (case-insensitive).
 SELECT user_id, full_name, email FROM Users
-WHERE full_name ILIKE 'Tanvir%' or full_name ILIKE '%Haque';
+WHERE full_name ILIKE 'tanvir%' or full_name ILIKE '%haque%';
 
 -- Query 3: Retrieve all booking records where the payment status is missing (NULL), replacing the empty result with 'Action Required'.
 SELECT booking_id, user_id, match_id, COALESCE(payment_status,'Action Required') AS systematic_status FROM Bookings
@@ -65,7 +65,7 @@ LEFT JOIN Bookings as b on u.user_id= b.user_id
 
 -- Query 6: Find all ticket bookings where the total cost is strictly higher than the average cost of all ticket bookings.
 SELECT booking_id, match_id, total_cost FROM Bookings
-WHERE total_cost >(
+WHERE total_cost > (
   SELECT AVG(total_cost) FROM Bookings
 );
 
